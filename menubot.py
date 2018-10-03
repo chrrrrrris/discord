@@ -1,5 +1,5 @@
-#Note this is setup for Python 3.4 to refactor for Python 3.5
-#replace @asyncio.coroutine with async and yield from with await
+#Note this is setup for Python 3.4 to refactor for Python 3.5.
+#replace @asyncio.coroutine with async and yield from with await.
 
 import discord
 from discord.ext import commands
@@ -36,7 +36,6 @@ def getMenu(url):
     print(url)
     page = requests.get('https://www.menulog.com.au/rang-mahal-epping')
     tree = html.fromstring(page.content)
-    #tree = html.fromstring(page)
     items = tree.xpath('//div[@class= "foodItemInfo"]/h4/text()')
     global foodItems
     foodItems = formatList(items)
@@ -56,10 +55,6 @@ def getMenu(url):
             return msg
         msg += "Item: "+ item + " Price: " + foodPrices[foodItems.index(item)] + " "
     return msg
-
-
-#print('Food Item: ', foodItems)
-#print('Prices: ', foodPrices)
 
 def searchByItem(item):
     for i in foodItems:
