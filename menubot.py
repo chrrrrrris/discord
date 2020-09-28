@@ -21,6 +21,7 @@ foodItems = []
 def formatPrice(preList):
     formattedList = []
     for element in preList:
+        # format the price to be better and remove spaces
         if element.isspace() is not True:
             formattedList.append(element.strip().replace("\n","").replace(" ",""))
     return formattedList
@@ -34,6 +35,7 @@ def formatList(preList):
 
 def getMenu(url):
     print(url)
+    # Grabs menu from Menulog, maybe feature in the future to add others?
     page = requests.get('https://www.menulog.com.au/rang-mahal-epping')
     tree = html.fromstring(page.content)
     #tree = html.fromstring(page)
@@ -113,5 +115,5 @@ async def getmenu(*args):
                     return
                 msg += "Item: "+ item + " Price: " + foodPrices[foodItems.index(item)] + " "
         await bot.say(msg)
-
+# run bot with the discord token
 bot.run('token')
