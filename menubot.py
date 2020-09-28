@@ -42,13 +42,10 @@ def getMenu(url):
     foodItems = formatList(items)
     prices = tree.xpath('//div[contains(@class, "varieties")]')
     addString = False
-    str1 = ""
-    testStr = ""
     foodPrices2 = []
     global foodPrices
     for price in prices:
         foodPrices.append(str(price.text_content()))
-
     foodPrices = formatPrice(foodPrices)
     msg = ""
     for item in foodItems:
@@ -81,20 +78,14 @@ async def getmenu(*args):
     print(len(args))
     page = requests.get(url)
     tree = html.fromstring(page.content)
-    #tree = html.fromstring(page)
     items = tree.xpath('//div[@class= "foodItemInfo"]/h4/text()')
     global foodItems
     foodItems = formatList(items)
     prices = tree.xpath('//div[contains(@class, "varieties")]')
-    addString = False
-    str1 = ""
-    testStr = ""
-    foodPrices2 = []
     global foodPrices
     foodPrices = []
     for price in prices:
         foodPrices.append(str(price.text_content()))
-
     foodPrices = formatPrice(foodPrices)
     msg = ""
     if len(args)==1:
@@ -104,7 +95,6 @@ async def getmenu(*args):
                 return
             msg += "Item: "+ item + " Price: " + foodPrices[foodItems.index(item)] + " "
     if len(args)==2:
-        print("wat")
         for item in foodItems:
             if args[1] in item.lower():
                 print("wat")
