@@ -25,7 +25,7 @@ def on_ready():
 @bot.command(pass_context=True, no_pm=True)
 @asyncio.coroutine
 def startvote(ctx, question, options):
-    if(pollInProgress == True):
+    if(pollInProgress):
         yield from bot.say("Starting new poll")
         yield from bot.say("The last poll's results are:")
         for i in optionList:
@@ -55,10 +55,10 @@ def get_options(message):
 @bot.command(pass_context=True, no_pm=True)
 @asyncio.coroutine
 def vote(ctx, choice):
-    if pollInProgress == False:
+    if (!pollInProgress):
         yield from bot.say("There isn't a poll in progress")
         return
-    if pollInProgress == True:
+    if (pollInProgress):
         voter = ctx.message.author
         alreadyVoted = False
         if choice.lower() not in optionList:
@@ -82,7 +82,7 @@ def vote(ctx, choice):
 @bot.command(pass_context=True, no_pm=True)
 @asyncio.coroutine
 def results(ctx):
-    if pollInProgress == True:
+    if (pollInProgress):
         yield from bot.say("The current results are:")
         for i in optionList:
             msg = ""
@@ -96,7 +96,7 @@ def results(ctx):
             ind = optionList.index(i.lower())
             msg += str(i)+ " has "+ str(len(choicesVotes[ind]))+" votes."
             yield from bot.say(msg)
-    if pollInProgress == False:
+    if (!pollInProgress):
         yield from bot.say("There are no results.")
 
 bot.run('token')
